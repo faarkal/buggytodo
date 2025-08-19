@@ -18,9 +18,7 @@
           </div>
           <button class="btn btn-primary">Save</button>
         </form>
-        <div class="form-text mt-2">
-          <strong>Hint:</strong> What happens if you submit HTML tags here?
-        </div>
+       
       </div>
     </div>
   </div>
@@ -33,7 +31,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Title (unescaped)</th>
+              <th>Title</th>
               <th>Status</th>
               <th class="text-end">Actions</th>
             </tr>
@@ -42,7 +40,7 @@
             @forelse($tasks as $task)
               <tr>
                 <td>{{ $task->id }}</td>
-                <td>{!! $task->title !!}</td> {{-- Intentionally unescaped output --}}
+                <td>{!! $task->title !!}</td>
                 <td>
                   @if($task->is_done)
                     <span class="badge bg-success">Done</span>
@@ -56,7 +54,7 @@
                     <button class="btn btn-sm btn-outline-secondary">Toggle</button>
                   </form>
 
-                  {{-- Intentionally dangerous: delete via GET link --}}
+                  
                   <a href="{{ route('tasks.destroy.get', $task->id) }}" class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
               </tr>
