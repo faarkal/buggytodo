@@ -5,7 +5,7 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-Route::post('/tasks/{id}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
+Route::patch('/tasks/{id}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
 Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 
 /**

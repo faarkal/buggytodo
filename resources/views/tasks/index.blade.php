@@ -51,6 +51,7 @@
                 <td class="text-end">
                   <form class="d-inline" action="{{ route('tasks.toggle', $task->id) }}" method="POST">
                     @csrf
+                    @method('PATCH')
                     <button class="btn btn-sm btn-outline-secondary">Toggle</button>
                   </form>
 

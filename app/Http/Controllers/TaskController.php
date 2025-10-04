@@ -17,7 +17,9 @@ class TaskController extends Controller
     
     public function store(Request $request)
     {
-       
+       $validated = $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
         Task::create($request->all());
         return redirect()->route('tasks.index');
     }
@@ -42,6 +44,9 @@ class TaskController extends Controller
     
     public function toggle(Request $request, $id)
     {
+        $request->validate([
+            'is_done' => 'boolean',
+        ]);
         $task = Task::findOrFail($id);
         $task->is_done = !$task->is_done;
         $task->save();
@@ -55,10 +60,9 @@ class TaskController extends Controller
         $results = [];
 
         if ($q !== '') {
-            
-            $results = Task::whereRaw("title LIKE '%{$q}%'")
-                ->orderBy('created_at', 'desc')
-                ->get();
+        $results = Task::where('title', 'LIKE', "%{$q}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
         }
 
         return view('tasks.index', ['tasks' => $results, 'q' => $q, 'search' => true]);
